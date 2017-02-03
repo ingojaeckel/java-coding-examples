@@ -7,11 +7,18 @@ public class Tree<T extends Comparable<T>> {
         this.root = root;
     }
 
+    public boolean isBinary() {
+        if (root == null) {
+            return false;
+        }
+        return root.isBinary();
+    }
+
     public Node<T> getRoot() {
         return root;
     }
 
-    public static class Node<K> {
+    public static class Node<K extends Comparable<K>> {
         private final K value;
         private Node<K> left, right;
 
@@ -43,6 +50,21 @@ public class Tree<T extends Comparable<T>> {
 
         public K getValue() {
             return value;
+        }
+
+        public boolean isBinary() {
+            if (left == null) {
+                if (right == null) {
+                    return true;
+                }
+                return value.compareTo(right.getValue()) < 0;
+            }
+
+            if (right == null) {
+                return left.getValue().compareTo(value) < 0;
+            }
+
+            return left.getValue().compareTo(value) < 0 && value.compareTo(right.getValue()) < 0;
         }
     }
 }
