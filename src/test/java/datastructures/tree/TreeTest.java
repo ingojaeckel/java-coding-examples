@@ -30,6 +30,14 @@ public class TreeTest {
 
         // left & right non-null
         Assert.assertTrue(new Tree.Node<>(2, new Tree.Node<>(1), new Tree.Node<>(3)).isBinary());
+
+        // multiple layers
+        //         4
+        //   (2    ,    5)
+        // (1 , 3)   (4 , 6)
+        Assert.assertTrue(new Tree.Node<>(4,
+            new Tree.Node<>(2, new Tree.Node<>(1), new Tree.Node<>(3)),
+            new Tree.Node<>(5, new Tree.Node<>(4), new Tree.Node<>(6))).isBinary());
     }
 
     @Test
@@ -38,5 +46,14 @@ public class TreeTest {
         Assert.assertFalse(new Tree.Node<>(2, new Tree.Node<>(3), null).isBinary());
 
         Assert.assertFalse(new Tree.Node<>(2, new Tree.Node<>(3), new Tree.Node<>(1)).isBinary());
+
+        // multiple layers
+        //         4
+        //   (2    ,    5)
+        // (1 , 3)   (6 , 4)
+        Assert.assertFalse(new Tree.Node<>(4,
+                new Tree.Node<>(2, new Tree.Node<>(1), new Tree.Node<>(3)),
+                new Tree.Node<>(5, new Tree.Node<>(6), new Tree.Node<>(4))).isBinary());
+
     }
 }
