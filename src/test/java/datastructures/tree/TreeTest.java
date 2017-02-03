@@ -1,28 +1,20 @@
 package datastructures.tree;
 
+import datastructures.trees.Tree;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import datastructures.Collection;
-import datastructures.trees.BinaryTree;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNull;
-
 public class TreeTest {
+
     @Test
-    public void testTree() {
-        Collection<Integer, String> tree = new BinaryTree<>();
-        assertNull(tree.get(1));
+    public void testUsingTree() {
+        Tree<Integer> tree = new Tree<>(new Tree.Node<>(2));
+        tree.getRoot().setLeft(new Tree.Node(1));
+        tree.getRoot().setRight(new Tree.Node(3));
 
-        testInsertGet(tree, 3, "foo");
-        testInsertGet(tree, 2, "bar");
-        testInsertGet(tree, 1, "baz");
-        testInsertGet(tree, 4, "charlie");
-
-        System.out.println(tree.traverse());
-    }
-
-    private <K extends Comparable<K>, V> void testInsertGet(Collection<K, V> tree, K key, V value) {
-        assertNull(tree.insert(key, value));
-        assertEquals(tree.get(key), value);
+        Assert.assertEquals(tree.getRoot().getValue().intValue(), 2);
+        Assert.assertEquals(tree.getRoot().getLeft().getValue().intValue(), 1);
+        Assert.assertEquals(tree.getRoot().getRight().getValue().intValue(), 3);
     }
 }

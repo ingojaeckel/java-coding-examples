@@ -62,7 +62,7 @@ public class ParkingLotTest {
         lot.park(ticket2, 1);
         Assert.assertEquals(lot.capacity(), initialCapacity - 2);
         lot.park(ticket3, 2);
-        Assert.assertEquals(lot.capacity(), initialCapacity - 3);
+        Assert.assertEquals(lot.capacity(), initialCapacity - 3); // out of capacity
     }
 
     @Test(expectedExceptions = OutOfCapacityException.class)
