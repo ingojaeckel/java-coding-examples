@@ -1,5 +1,8 @@
 package datastructures.trees;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Tree<T extends Comparable<T>> {
     private Node<T> root;
 
@@ -52,19 +55,43 @@ public class Tree<T extends Comparable<T>> {
             return value;
         }
 
+        public List<K> traverse() {
+            List<K> items = new ArrayList<>();
+            if (left != null) {
+                items.addAll(left.traverse());
+            }
+            items.add(value);
+            if (right != null) {
+                items.addAll(right.traverse());
+            }
+            return items;
+        }
+
+        public boolean allNodesBiggerThan(K value) {
+            List<K> nodes = traverse();
+            return nodes.size() == nodes.stream().filter(current -> value.compareTo(current) < 0).count();
+        }
+
+        public boolean allNodesSmallerThan(K value) {
+            List<K> nodes = traverse();
+            return nodes.size() == traverse().stream().filter(current -> value.compareTo(current) > 0).count();
+        }
+
         public boolean isBinary() {
             if (left == null) {
                 if (right == null) {
                     return true;
                 }
-                return value.compareTo(right.getValue()) < 0;
+                return value.compareTo(right.value) < 0 && right.allNodesBiggerThan(value) && right.isBinary();
             }
 
             if (right == null) {
-                return left.getValue().compareTo(value) < 0;
+                return left.value.compareTo(value) < 0 && left.allNodesSmallerThan(value) && left.isBinary();
             }
 
-            return left.getValue().compareTo(value) < 0 && value.compareTo(right.getValue()) < 0;
+            return  left.value.compareTo(value) < 0 && value.compareTo(right.value) < 0 &&
+                    left.allNodesSmallerThan(value) && right.allNodesBiggerThan(value) &&
+                    left.isBinary() && right.isBinary();
         }
     }
 }

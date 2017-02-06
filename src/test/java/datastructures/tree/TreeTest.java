@@ -4,6 +4,8 @@ import datastructures.trees.Tree;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 public class TreeTest {
 
     @Test
@@ -33,11 +35,11 @@ public class TreeTest {
 
         // multiple layers
         //         4
-        //   (2    ,    5)
-        // (1 , 3)   (4 , 6)
+        //   (2    ,    6)
+        // (1 , 3)   (5 , 7)
         Assert.assertTrue(new Tree.Node<>(4,
             new Tree.Node<>(2, new Tree.Node<>(1), new Tree.Node<>(3)),
-            new Tree.Node<>(5, new Tree.Node<>(4), new Tree.Node<>(6))).isBinary());
+            new Tree.Node<>(6, new Tree.Node<>(5), new Tree.Node<>(7))).isBinary());
     }
 
     @Test
@@ -55,5 +57,26 @@ public class TreeTest {
                 new Tree.Node<>(2, new Tree.Node<>(1), new Tree.Node<>(3)),
                 new Tree.Node<>(5, new Tree.Node<>(6), new Tree.Node<>(4))).isBinary());
 
+    }
+
+    @Test
+    public void testTraverse() {
+        //         4
+        //   (2    ,    6)
+        // (1 , 3)   (5 , 7)
+        Assert.assertEquals(new Tree.Node<>(4,
+                new Tree.Node<>(2, new Tree.Node<>(1), new Tree.Node<>(3)),
+                new Tree.Node<>(6, new Tree.Node<>(5), new Tree.Node<>(7))).traverse(), Arrays.asList(1,2,3,4,5,6,7));
+    }
+
+    @Test
+    public void testTraverseAndCompare() {
+        Tree.Node<Integer> tree = new Tree.Node<>(2, new Tree.Node<>(1), new Tree.Node<>(3));
+
+        Assert.assertTrue(tree.allNodesBiggerThan(0));
+        Assert.assertTrue(tree.allNodesSmallerThan(4));
+
+        Assert.assertFalse(tree.allNodesBiggerThan(4));
+        Assert.assertFalse(tree.allNodesSmallerThan(0));
     }
 }
