@@ -2,17 +2,17 @@ package algorithms.misc;
 
 public class PythagoreanTriplet {
 
-    public Result find(int ... parameters) {
-        L1: for (int i=0; i<parameters.length; i++) {
-            L2: for (int j=0; j<parameters.length; j++) {
+    public Result find(final int ... parameters) {
+        for (int i=0; i<parameters.length; i++) {
+            for (int j=0; j<parameters.length; j++) {
 
                 if (j==i) {
-                    continue L2;
+                    continue;
                 }
 
-                L3: for (int k=0; k<parameters.length; k++) {
+                for (int k=0; k<parameters.length; k++) {
                     if (k==j || k==i) {
-                        continue L3;
+                        continue;
                     }
 
                     if (matches(parameters[i], parameters[j], parameters[k])) {
@@ -30,7 +30,7 @@ public class PythagoreanTriplet {
     }
 
     public static class Result {
-        private boolean exists;
+        private final boolean exists;
         private int a, b, c;
 
         public Result() {
