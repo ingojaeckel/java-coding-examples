@@ -82,7 +82,6 @@ public class SortedLinkedList<K extends Comparable<K>, V> implements Collection<
             builder.append("/");
             builder.append(node.value);
 
-
             if (node.next != null) {
                 builder.append(" ");
             }

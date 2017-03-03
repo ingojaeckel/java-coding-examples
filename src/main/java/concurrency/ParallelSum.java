@@ -12,19 +12,8 @@ public class ParallelSum {
     public int sum(File file) throws Exception {
         ImmutableList<String> lines = ImmutableList.copyOf(Files.readLines(file, Charsets.UTF_8));
         ExecutorService threadPool = Executors.newFixedThreadPool(2);
-        Future<Integer> numberOfLeftCurlyBrace = threadPool.submit(new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                return count(lines, "{");
-            }
-        });
-
-        Future<Integer> numberOfRightCurlyBrace = threadPool.submit(new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                return count(lines, "}");
-            }
-        });
+        Future<Integer> numberOfLeftCurlyBrace = threadPool.submit(() -> count(lines, "{"));
+        Future<Integer> numberOfRightCurlyBrace = threadPool.submit(() -> count(lines, "}"));
 
         return numberOfLeftCurlyBrace.get() + numberOfRightCurlyBrace.get();
     }

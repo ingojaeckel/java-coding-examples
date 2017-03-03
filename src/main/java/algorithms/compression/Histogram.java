@@ -22,17 +22,14 @@ public class Histogram {
     }
 
     private Map<String, Integer> sortByValues(final Map<String, Integer> frequency) {
-        Map<String, Integer> sortedByValues = new TreeMap<>(new Comparator<String>() {
-            @Override
-            public int compare(String lhs, String rhs) {
-                final int value = frequency.get(lhs).compareTo(frequency.get(rhs));
-                if (value == 0) {
-                    // Prevent overriding values with the same frequency.
-                    return 1;
-                }
-                // Sort descending
-                return -value;
+        Map<String, Integer> sortedByValues = new TreeMap<>((lhs, rhs) -> {
+            final int value = frequency.get(lhs).compareTo(frequency.get(rhs));
+            if (value == 0) {
+                // Prevent overriding values with the same frequency.
+                return 1;
             }
+            // Sort descending
+            return -value;
         });
         sortedByValues.putAll(frequency);
         return sortedByValues;

@@ -9,5 +9,6 @@ public class SumLinkedListNumbersTest {
     @Test
     public void test() {
         Assert.assertEquals(new SumLinkedListNumbers().sum(Arrays.asList(1, 0, 0), Arrays.asList(1, 2, 3)), 223);
+        Assert.assertEquals(new SumLinkedListNumbers().sum(Arrays.asList(1, 0), Arrays.asList(1, 1, 3)), 123);
     }
 }
