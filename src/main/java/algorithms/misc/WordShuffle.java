@@ -7,10 +7,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WordShuffle {
-    public List<String> shuffle(char[] characters) {
+    public List<String> shuffle(String characters) {
         Set<Character> available = new HashSet<>();
-        for (int i=0; i<characters.length; i++) {
-            available.add(characters[i]);
+        for (int i=0; i<characters.length(); i++) {
+            available.add(characters.charAt(i));
         }
 
         return permutations(available);
