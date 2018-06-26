@@ -1,16 +1,27 @@
 package algorithms.compression;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 public abstract class AbstractCompressionTest {
-    protected String getTestData() throws Exception {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream("uncompressed.txt")));
-        StringBuilder builder = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            builder.append(line);
+    private static String testData;
+
+    public AbstractCompressionTest() {
+        try (InputStreamReader is = new InputStreamReader(AbstractCompressionTest.class.getClassLoader().getResourceAsStream("uncompressed.txt"))) {
+            BufferedReader reader = new BufferedReader(is);
+            StringBuilder builder = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                builder.append(line);
+            }
+            testData = builder.toString();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return builder.toString();
+    }
+
+    protected String getTestData() {
+        return testData;
     }
 }

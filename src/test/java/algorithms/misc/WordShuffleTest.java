@@ -19,21 +19,21 @@ public class WordShuffleTest {
     @Test
     public void testTwoLetterWordShuffle() {
         List<String> p = shuffler.shuffle("ca");
-        Assert.assertEquals(2, p.size());
+        Assert.assertEquals(p.size(), 2);
         Assert.assertTrue(p.containsAll(Arrays.asList("ac", "ca")));
     }
 
     @Test
     public void testWordShuffle() {
         List<String> p = shuffler.shuffle("canet");
-        Assert.assertEquals(1 * 2 * 3 * 4 * 5, p.size()); // = 120
+        Assert.assertEquals(p.size(), 1 * 2 * 3 * 4 * 5); // = 120
         // p.forEach(s -> System.out.println(s));
     }
 
     @Test
     public void testWordShuffle2() {
         List<String> p = shuffler.shuffle("varcot");
-        Assert.assertEquals(1 * 2 * 3 * 4 * 5 * 6, p.size()); // = 720
+        Assert.assertEquals(p.size(), 1 * 2 * 3 * 4 * 5 * 6); // = 720
         // p.forEach(s -> System.out.println(s));
     }
 }
